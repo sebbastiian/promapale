@@ -21,7 +21,7 @@
  		<link href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700" rel="stylesheet">
 
  		<!-- Bootstrap -->
- 		<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css"/>
+ 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
  		<!-- Slick -->
  		<link type="text/css" rel="stylesheet" href="css/slick.css"/>
@@ -50,8 +50,8 @@
 
 <body>
 
-    @livewire('navigation-menu')
-    {{-- <x-app-layout></x-app-layout> --}}
+    {{-- @livewire('navigation-menu') --}}
+    <x-app-layout></x-app-layout>
         <!-- HEADER -->
         <header>
             
@@ -207,11 +207,11 @@
         <!-- NAVIGATION -->
         <nav id="navigation">
             <!-- container -->
-            <div class="container">
+            <div class="">
                 <!-- responsive-nav -->
                 <div id="responsive-nav">
                     <!-- NAV -->
-                    <ul class="main-nav nav navbar-nav">
+                    <ul class="main-nav disp">
                         <li class="active"><a href="#">Principal</a></li>
                         <li><a href="#">Ofertas</a></li>
                         <li><a href="#">Categorias</a></li>
@@ -754,7 +754,6 @@
                             <div class="footer">
                                 <h3 class="footer-title">Servicio</h3>
                                 <ul class="footer-links">
-                                    <li><a href="#">Mi cueta</a></li>
                                     <li><a href="#">Ver carrito</a></li>
                                     <li><a href="#">Favoritos</a></li>
                                     <li><a href="#">Seguimiento de mi pedido</a></li>

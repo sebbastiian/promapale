@@ -659,7 +659,12 @@ textarea.input {
 .header-ctn li.nav-toggle {
   display: none;
 }
-
+.disp{
+  display: flex;
+  flex-direction: row;
+  margin: 15px;
+  padding-left: 15px;
+}
 /*----------------------------*\
 	responsive nav
 \*----------------------------*/
@@ -667,6 +672,10 @@ textarea.input {
 @media only screen and (max-width: 991px) {
   .header-ctn .menu-toggle {
     display: inline-block;
+  }
+  .disp{
+    display: flex;
+    flex-direction: column;
   }
   #responsive-nav {
     position: fixed;
