@@ -195,11 +195,11 @@
     
         <x-slot name="actions">
             <x-action-message class="mr-3" on="saved">
-                {{ __('Guardado.') }}
+                {{ __('Saved.') }}
             </x-action-message>
     
             <x-button wire:loading.attr="disabled" wire:target="photo">
-                {{ __('Guardar') }}
+                {{ __('Save') }}
             </x-button>
         </x-slot>
     </x-form-section>

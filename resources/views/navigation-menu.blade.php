@@ -2,16 +2,17 @@
     
     <!-- Primary Navigation Menu -->
     <div class="mx-auto px-4 sm:px-6 lg:px-8" id="top-header">
-        <div class="flex justify-between items-center">
+        <div class="flex justify-between items-center">   
             <div class="container espacioingresar">
+                @role('cliente')
                 <ul class="header-links pull-left">
                     <li><a href="#"><i class="fa fa-phone"></i> +57 320 328 2358</a></li>
                     <li><a href="#"><i class="fa fa-envelope-o"></i> distrimapale@email.com</a></li>
-                    <li><a href="#"><i class="fa fa-map-marker"></i> Bosa Brasilia, Bogotá DC</a></li>
+                    <li><a href="#"><i class="fa fa-map-marker"></i> Bosa Brasilia, Bogotá DC</a></li> 
                 </ul>
-
+                @endrole
             </div>
-
+            
             <div class="hidden sm:flex sm:items-center sm:ml-6">
                 <!-- Teams Dropdown -->
                 @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())

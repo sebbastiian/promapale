@@ -25,6 +25,10 @@ Route::middleware([
     })->name('dashboard');
 });
 
+
+/*administrador*/
+Route::get('administrador/Index',[App\Http\Controllers\AdminController::class, 'index'])->name('administrador.index');
+
 /*TIPO*/
 Route::get('tipos/Index',[App\Http\Controllers\TiposController::class, 'index'])->name('tipos.index');
 Route::get('tipos/create',[App\Http\Controllers\TiposController::class,'create'])->name('tipos.create');

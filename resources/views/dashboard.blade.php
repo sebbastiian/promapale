@@ -39,6 +39,7 @@
         {{-- MY CUSTOM --}}
         <link rel="stylesheet" href="css/infotop.css">
         <link rel="stylesheet" href="css/searchbar.css">
+        <link rel="stylesheet" href="css/admindashboard.css">
  		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
  		<!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
  		<!--[if lt IE 9]>
@@ -49,7 +50,23 @@
 </head>
 
 <body>
+    @role('administrador')
+    <div class="bodyadmin">
+        <div class="divadmin">
+        
+            <img class="imgadmin" src="./img/logomd.png" alt="">
+    
+            <div class="divadminn">
+                <h1 class="h1admin">Bienvenido {{ Auth::user()->name }}</h1>
 
+                <a class="aadmin" href="{{route('administrador.index')}}">Vamos a trabajar!</a>
+            </div> 
+            
+        </div>
+    </div>
+    @endrole
+
+    @role('cliente')
     {{-- @livewire('navigation-menu') --}}
     <x-app-layout></x-app-layout>
         <!-- HEADER -->
@@ -794,7 +811,7 @@
             <!-- /bottom footer -->
         </footer>
         <!-- /FOOTER -->
-
+        @endrole
         <!-- jQuery Plugins -->
         <script src="js/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
