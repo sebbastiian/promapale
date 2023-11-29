@@ -66,7 +66,7 @@
     </div>
     @endrole
 
-    @role('cliente|transportador')
+    @role('cliente')
     {{-- @livewire('navigation-menu') --}}
     <x-app-layout></x-app-layout>
         <!-- HEADER -->
@@ -120,30 +120,49 @@
                                     <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                         <i class="fa fa-heart-o"></i>
                                         <span>Favoritos</span>
-                                        <div class="qty">
-                                            <span class="">
-                                              0
-                                            </span>
-                                        </div>
+                                        <div class="qty">2</div>
                                     </a>
-                                    
+                                    <div class="cart-dropdown">
+                                        <div class="cart-list">
+                                            <div class="product-widget">
+                                                <div class="product-img">
+                                                    <img src="./img/product01.png" alt="">
+                                                </div>
+                                                <div class="product-body">
+                                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                                    <h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+                                                </div>
+                                                <button class="delete"><i class="fa fa-close"></i></button>
+                                            </div>
+
+                                            <div class="product-widget">
+                                                <div class="product-img">
+                                                    <img src="./img/product02.png" alt="">
+                                                </div>
+                                                <div class="product-body">
+                                                    <h3 class="product-name"><a href="#">product name goes here</a></h3>
+                                                    <h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
+                                                </div>
+                                                <button class="delete"><i class="fa fa-close"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="cart-summary">
+                                            <small>3 Item(s) selected</small>
+                                            <h5>SUBTOTAL: $2940.00</h5>
+                                        </div>
+                                        <div class="cart-btns">
+                                            <a href="#">View Cart</a>
+                                            <a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+                                        </div>
+                                    </div>
                                 </div>
                                 <!-- /Wishlist -->
 
-                                                               <!-- Menu Toogle -->
-                                <div class="menu-toggle">
-                                    <a href="#">
-                                        <i class="fa fa-bars"></i>
-                                        <span>Menu</span>
-                                    </a>
-                                </div>
-                                <!-- /Menu Toogle -->
-
                                 <!-- Cart -->
                                 <div class="dropdown">
-                                    <a  data-toggle="dropdown" aria-expanded="true" href="{{route('chekout')}}">
+                                    <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" href="{{route('chekout')}}">
                                         <i class="fa fa-shopping-cart"></i>
-                                        <span>Carrito </span>
+                                        Carrito 
                                         <div class="qty">
                                             <span class="">
                                                 {{\Cart::count()}}
@@ -153,6 +172,14 @@
                                 </div>
                                 <!-- /Cart -->
 
+                                <!-- Menu Toogle -->
+                                <div class="menu-toggle">
+                                    <a href="#">
+                                        <i class="fa fa-bars"></i>
+                                        <span>Menu</span>
+                                    </a>
+                                </div>
+                                <!-- /Menu Toogle -->
                             </div>
                         </div>
                         <!-- /ACCOUNT -->
@@ -311,7 +338,71 @@
         </div>
         <!-- /SECTION -->
 
+             
+        <!-- /Productos -->
+        <a href="">tikili</a>
 
+        @section('content')
+        <div class="container">
+            <div class="row justify-content-center">
+             <div class="card">
+                <div class="card-body">
+                    @if (Cart::count())
+                    <table class="table table-striped">
+                        <thead>
+                            <th>ID</th>
+                            <th>NOMBRE</th>
+                            <th>CANTIDAD</th>
+                            <th>PRECIO UNITARIO</th>
+                            <th>IMPORTE</th>
+                        </thead>
+                        <tbody>
+                            @foreach (Cart::content() as $fila)
+                                <tr class="align-middle">
+                                    <td><img src="/img/{{$fila->options->imagen}}" width="50"></td>
+                                    <td>{{$fila->name}}</td>
+                                    <td>{{$fila->qty}}</td>
+                                    <td>{{number_format($fila->price,2)}}</td>
+                                    <td>{{number_format($fila->qty * $fila->price)}}</td>
+                                    <td>
+                                        <form action="{{route('removeItem')}}" method="post">
+                                            @csrf
+                                            <input type="hidden" name="rowId" value="{{$fila->rowId}}">
+                                            <input type="submit" name="btn" class="btn btn-danger btn-sm" value="x">
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            <tr class="fw-bolder">
+                                <td colspan="4"></td>
+                                <td class="text-end">subtotal</td>
+                                <td class="text-end">{{Cart::subtotal()}}</td>
+                                <td></td>
+                            </tr>
+                            <tr class="fw-bolder">
+                                <td colspan="4"></td>
+                                <td class="text-end">tax</td>
+                                <td class="text-end">{{Cart::tax()}}</td>
+                                <td></td>
+                            </tr>
+                            <tr class="fw-bolder">
+                                <td colspan="4"></td>
+                                <td class="text-end">total</td>
+                                <td class="text-end">{{Cart::total()}}</td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="{{route("clear")}}" class="text-center">Vaciar Carrito</a>
+                    @else
+                        <a href="{{route("dashboard")}}" class="text-center">Agrega un Producto</a>
+                    @endif
+                </div>
+             </div>
+            </div>
+        </div>
+
+        <!-- /Productos -->
 
 
         <!-- SECTION -->
@@ -320,112 +411,6 @@
             <div class="container">
                 <!-- row -->
                 <div class="row">
-                            <!-- /Productos -->
-        <div class="col-md-12">
-            <div class="section-title">
-                <h3 class="title">TODOS NUESTROS PRODUCTOS</h3>
-            </div>
-        </div>
-        @section('content')
-        <div class="container">
-            <div class="row justify-content-center">
-                @include('front.partials.msg')
-                @forelse($productos as $fila)
-                <div class="col-4">
-                    <div class="product">
-                        <div class="product-img">
-                            @if ($fila->imagen)
-                            <img src="img/{{$fila->imagen}}" alt="imagen">
-                            @else
-                            <p>Sin Imagen</p>
-                            @endif
-                            <div class="product-label">
-                            </div>
-                        </div>
-                        <div class="product-body">
-                            <p class="product-category">{{$fila->idtipo}}</p>
-                            <h3 class="product-name">{{$fila->descripcion}}</h3>
-                            <h4 class="product-price">COP{{$fila->valor}}</h4>
-                            <!-- Aquí puedes agregar más detalles del producto si es necesario -->
-                            <div class="product-rating">
-                                <!-- Puedes mostrar la calificación del producto si tienes esa información -->
-                                <div class="product-rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                            <div class="product-btns">
-                                <form action="{{route('add')}}" method="post">
-                                    @csrf
-                                    <input type="hidden" name="idproducto" value="{{$fila->idproducto}}">
-                                    <button class="add-to-cart-btn" type="submit"><i class="fa fa-shopping-cart"></i> AGREGAR</button>
-                                </form>
-                                <!-- Puedes agregar un botón de "Agregar a favoritos" si es necesario -->
-                                <div class="post product-btns" id="{{$fila->idproducto}}">
-                                @auth 
-                                <div class="product-btns" id="{{$fila->idproducto}}">
-                                        <button class="add-to-wishlist">
-                                            <span class="{{$fila->likes->contains("iduser",auth()->id()) ? 'text-danger':'text-dark' }}" id="heart{{$fila->idproducto}}">
-                                                <i class="fa fa-heart-o">
-                                                </i>
-                                            </span>   
-                                        </button>                    
-                                </div> 
-                                @else
-                                <a href="/login" class="text-dark text-decoration-none">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
-                                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314"/>
-                                    </svg>
-                                </a>  
-                                @endauth  
-                                <p class="d-inline" id="count{{$fila->idproducto}}"> Likes {{$fila->likes->count()}}</p>                                                                          
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                @empty
-                <p>No hay productos disponibles.</p>
-                @endforelse
-            </div>
-        </div>
-
-        <script>
-            const token = document.querySelector('meta[name="csrf-token"]').content;
-            let posts = document.querySelectorAll(".post")
-        
-            posts.forEach(post => {       
-                document.getElementById(post.id).addEventListener("click",e=>{            
-                    fetch("/like",{
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'Content-Type': 'application/json',
-                            'X-CSRF-TOKEN': token
-                        },
-                        method: 'post',
-                        body: JSON.stringify({
-                            id : post.id
-                        })
-                    }).then(response => { 
-                        response.json().then(data => {
-                    let count = document.getElementById("count"+post.id)
-                    count.innerHTML = " Likes "+data.count
-
-                    let heart = document.getElementById("heart"+post.id)
-                    heart.className = ""                    
-                    heart.classList.add(data.color)
-                })
-                    }).catch(error => {
-                            console.log(error)
-                    });  
-                })        
-            });
-        </script>
-        <!-- /Productos -->
-        
                 </div>
                 <!-- /row -->
             </div>
@@ -442,7 +427,7 @@
                     <!-- section title -->
                     <div class="col-md-12">
                         <div class="section-title">
-                            <h3 class="title">TOP VENDIDOS</h3>
+                            <h3 class="title">Top selling</h3>
                         </div>
                     </div>
                     <!-- /section title -->

@@ -25,6 +25,18 @@ Route::middleware([
     })->name('dashboard');
 });
 
+/*FAVORITOS*/
+//Route:: get('dashboard',[App\Http\Controllers\PostController::class, 'index'])->name('dashboard');
+
+Route::post('/like', [App\Http\Controllers\PostController::class,'like'])->name('like');
+
+/*CARRITO*/
+Route:: get('dashboard',[App\Http\Controllers\FrontController::class, 'index'])->name('dashboard');
+Route:: post('cart/add', [App\Http\Controllers\CartController::class, 'add'])->name('add');
+Route:: get('cart/chekout', [App\Http\Controllers\CartController::class, 'chekout'])->name('chekout');
+Route:: get('cart/clear', [App\Http\Controllers\CartController::class, 'clear'])->name('clear');
+Route:: post('cart/removeitem', [App\Http\Controllers\CartController::class, 'removeItem'])->name('removeItem');
+
 
 /*administrador*/
 Route::get('administrador/Index',[App\Http\Controllers\AdminController::class, 'index'])->name('administrador.index');
