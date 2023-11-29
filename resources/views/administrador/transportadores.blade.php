@@ -30,7 +30,7 @@
         <nav class="navegacion">
             <ul>
                 <li>
-                    <a id="inbox" href="#">
+                    <a href="{{route('administrador.index')}}">
                         <ion-icon name="clipboard-outline"></ion-icon>
                         <span>Tablas</span>
                     </a>
@@ -48,7 +48,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('administrador.transportadores')}}">
+                    <a id="inbox" href="#">
                         <ion-icon name="man-outline"></ion-icon>
                         <span>Empleados</span>
                     </a>
@@ -66,7 +66,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{-- {{route('administrador.factura')}} --}}">
+                    <a href="{{-- {{route('administrador.facturas')}} --}}">
                         <ion-icon name="cash-outline"></ion-icon>
                         <span>Ventas</span>
                     </a>
@@ -125,9 +125,64 @@
 
 
     <main>
+
         <div class="tittlee">
-            <h1>Tablas</h1>
+            <h1>Empleados</h1>
         </div>
+        
+        <div class="containert">
+            <div class="titabl">
+
+                <h2>Transportadores</h2>
+                
+                <div class="caja-crear">
+                    <a href="{{ route('register') }}">
+                        <button class="boton" >
+                            <ion-icon name="add-outline"></ion-icon>
+                            <span>Crear nuevo</span>
+                        </button>
+                    </a>
+                </div>
+                
+            </div>
+            <table class="tablee">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Sueldo</th>
+                        <th>Estado</th>
+                        <th>Correo</th>
+                        <th>Tienda</th>
+                        <th>Direccion</th>
+                        <th>Teléfono</th>
+                        <th>Tipo Doc.</th>
+                        <th>Documento</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($usuarios as $usuario)
+                        @if ($usuario->roles_id == 3)
+                            <tr>
+                                <td data-label="Id">{{ $usuario->id }}</td>
+                                <td data-label="Nombre">{{ $usuario->name }}</td>
+                                <td data-label="Apellido">{{ $usuario->apellido }}</td>
+                                <td data-label="Salario">{{ $usuario->sueldo }}</td>
+                                <td data-label="Estado">{{ $usuario->estado }}</td>     
+                                <td data-label="Correo">{{ $usuario->email }}</td>
+                                <td data-label="Tienda">{{ $usuario->nombretienda }}</td>
+                                <td data-label="Direccion">{{ $usuario->direccion }}</td>
+                                <td data-label="Teléfono">{{ $usuario->telefono }}</td>
+                                <td data-label="Tipo Doc.">{{ $usuario->tipodocumento }}</td>
+                                <td data-label="Documento">{{ $usuario->documento }}</td>
+                            </tr>
+                        @endif
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        
     </main>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

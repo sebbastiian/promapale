@@ -30,13 +30,13 @@
         <nav class="navegacion">
             <ul>
                 <li>
-                    <a id="inbox" href="#">
+                    <a  href="{{route('administrador.index')}}">
                         <ion-icon name="clipboard-outline"></ion-icon>
                         <span>Tablas</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('administrador.inventario')}}">
+                    <a id="inbox" href="#">
                         <ion-icon name="folder-outline"></ion-icon>
                         <span>Inventario</span>
                     </a>
@@ -60,13 +60,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{-- {{route('administrador.programaciones')}} --}}">
+                    <a href="{{route('administrador.programaciones')}}">
                         <ion-icon name="calendar-outline"></ion-icon>
                         <span>Cronograma</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{-- {{route('administrador.factura')}} --}}">
+                    <a href="{{-- {{route('administrador.facturas')}} --}}">
                         <ion-icon name="cash-outline"></ion-icon>
                         <span>Ventas</span>
                     </a>
@@ -125,8 +125,73 @@
 
 
     <main>
+
         <div class="tittlee">
-            <h1>Tablas</h1>
+            <h1>Nuevo Producto</h1>
+        </div>
+        <div class="cajaform">
+            <form action="{{route('productos.store')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <fieldset class="fieldset">
+                    <legend>Nuevo Producto</legend>
+
+                    <div>
+                        <label for="idmarca">Marca</label>
+                        <select name="idmarca" id="idmarca" class="form-control">
+                            @foreach($marcas as $marca)
+                            <option value="{{$marca->idmarca}}">{{$marca->nombre}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="idtipo">Tipo</label>
+                        <select name="idtipo" id="idtipo" class="form-control">
+                            @foreach($tipos as $tipo)
+                            <option value="{{$tipo->idtipo}}">{{$tipo->nombre}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="descripcion">Descripcion del producto</label>
+                        <input type="text" name="descripcion" id="descripcion" >
+                    </div>
+            
+                    <div>
+                        <label for="cantidad">Cantidad del producto</label>
+                        <input type="number" name="cantidad" id="cantidad" >
+                    </div>
+            
+                    <div>
+                        <label for="contneto">Contenido Neto</label>
+                        <input type="text" name="contneto" id="contneto" >
+                    </div>
+            
+                    <div>
+                        <label for="unidadxempaque">Unidad x Empaque</label>
+                        <input type="number" name="unidadxempaque" id="unidadxempaque" >
+                    </div>
+            
+                    <div>
+                        <select name="disponibilidad" class="form-control">
+                            <option value="Disponible">Disponible</option>
+                            <option value="NoDisponible">No Disponible</option>
+                        </select>
+                    </div>
+            
+                    <div>
+                        <label for="valor">Valor del producto</label>
+                        <input type="text" name="valor" id="valor" >
+                    </div>
+                
+                    <div>
+                        <label for="imagen">Imagen del producto</label>
+                        <input type="file" name="imagen" id="imagen">
+                    </div>
+                    <a href="" onclick="return alert('¡Producto Agregado!')"><button type="submit">Crear Producto</button></a>
+            </fieldset>
+            </form>
         </div>
     </main>
 

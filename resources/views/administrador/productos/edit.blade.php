@@ -30,13 +30,13 @@
         <nav class="navegacion">
             <ul>
                 <li>
-                    <a id="inbox" href="#">
+                    <a  href="{{route('administrador.index')}}">
                         <ion-icon name="clipboard-outline"></ion-icon>
                         <span>Tablas</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('administrador.inventario')}}">
+                    <a id="inbox" href="#">
                         <ion-icon name="folder-outline"></ion-icon>
                         <span>Inventario</span>
                     </a>
@@ -60,13 +60,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{-- {{route('administrador.programaciones')}} --}}">
+                    <a href="{{route('administrador.programaciones')}}">
                         <ion-icon name="calendar-outline"></ion-icon>
                         <span>Cronograma</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{-- {{route('administrador.factura')}} --}}">
+                    <a href="{{-- {{route('administrador.facturas')}} --}}">
                         <ion-icon name="cash-outline"></ion-icon>
                         <span>Ventas</span>
                     </a>
@@ -125,8 +125,80 @@
 
 
     <main>
+
         <div class="tittlee">
-            <h1>Tablas</h1>
+            <h1>Editar Productos</h1>
+        </div>
+        <div class="cajaform">
+            <form action="{{ route('productos.update', $productos) }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                @method('GET')
+                <fieldset class="fieldset">
+                <legend>Editar Datos del Producto</legend>
+                    <div>
+                        <label for="marca">Marca</label>
+                        <select name="idmarca" class="form-control">
+                            <@forelse ($marcas as $marca)
+                            @if($productos->idmarca==$marca->idmarca)
+                            <option value="{{$marca->idmarca}}"selected>{{ $marca->nombre}}</option>
+                            @else
+                            <option value="{{$marca->idmarca}}"selected>{{ $marca->nombre}}</option>
+                            @endif
+                            @empty 
+                        @endforelse
+                        </select>
+                    </div>
+
+                    <div>
+                        <label for="tipos">Tipo</label>
+                        <select name="idtipo" class="form-control">
+                            <@forelse ($tipos as $tipo)
+                            @if($productos->idtipo==$tipo->idtipo)
+                            <option value="{{$tipo->idtipo}}"selected>{{ $tipo->nombre}}</option>
+                            @else
+                            <option value="{{$tipo->idtipo}}"selected>{{ $tipo->nombre}}</option>
+                            @endif
+                            @empty 
+                        @endforelse
+                        </select>
+                    </div>
+
+                    <div>
+                        <label>Detalle:</label>
+                        <input type="text" name="descripcion" id="descripcion" value="{{$productos->descripcion}}">
+                    </div>
+
+                    <div>
+                        <label>Cantidad:</label>
+                        <input type="number" name="cantidad" id="cantidad" value="{{$productos->cantidad}}">
+                    </div>
+
+                    <div>
+                        <label>Contenido Neto:</label>
+                        <input type="text" name="contneto" id="contneto" value="{{$productos->contneto}}">
+                    </div>
+
+                    <div>
+                        <label>Unidad por Empaque:</label>
+                        <input type="text" name="unidadxempaque" id="unidadxempaque" value="{{$productos->unidadxempaque}}">
+                    </div>
+
+                    <div>
+                        <label>Estado:</label>
+                        <input type="text" name="disponibilidad" id="disponibilidad" value="{{$productos->disponibilidad}}">
+                    </div>
+
+                    <div>
+                        <label>Valor:</label>
+                        <input type="text" name="valor" id="valor" value="{{$productos->valor}}">
+                    </div>
+                    {{-- <div>
+                        <label for="imagen">Imagen del producto</label>
+                        <input type="file" name="imagen" id="imagen">
+                    </div> --}}
+                    <button type="submit">Actualizar</button>
+                </fieldset>
+            </form>
         </div>
     </main>
 

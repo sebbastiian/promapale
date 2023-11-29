@@ -1,21 +1,22 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+use App\Models\Tipos;
 
-
-class AdminController extends Controller
+class TiposController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
         //
-        return view('administrador/index');
+        $tipos = Tipos::orderBy('nombre', 'ASC')->get();
+        //return $marcas;
+        return view('administrador/inventario', ['tipos'=>$tipos]);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -23,6 +24,7 @@ class AdminController extends Controller
     public function create()
     {
         //
+        return view('administrador/tipos/create');
     }
 
     /**
@@ -31,6 +33,8 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         //
+        Tipos::create(['nombre' =>request('nombre')]);
+        return redirect()->route('administrador.inventario');
     }
 
     /**
@@ -47,6 +51,8 @@ class AdminController extends Controller
     public function edit(string $id)
     {
         //
+        $tipos = Tipos::findOrFail($id);
+        return view('administrador.tipos.edit',['tipos'=>$tipos]);
     }
 
     /**
@@ -55,6 +61,10 @@ class AdminController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $tipos = Tipos::findOrFail($id);
+        $tipos->update($request->all());
+        $tipos->save();
+        return redirect()->route('administrador.inventario');
     }
 
     /**
@@ -63,5 +73,8 @@ class AdminController extends Controller
     public function destroy(string $id)
     {
         //
+        $tipos = Tipos::findOrFail($id);
+        $tipos->delete();
+        return redirect()->route('administrador.inventario');
     }
 }

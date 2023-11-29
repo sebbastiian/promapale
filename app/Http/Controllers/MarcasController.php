@@ -1,21 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+use App\Models\Marcas;
+use DB;
 
-
-class AdminController extends Controller
+class MarcasController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
         //
-        return view('administrador/index');
+        $marcas = Marcas::orderBy('nombre', 'ASC')->get();
+        //return $marcas;
+        return view('administrador/inventario', ['marcas'=>$marcas]);
     }
-
 
     /**
      * Show the form for creating a new resource.
@@ -23,6 +25,7 @@ class AdminController extends Controller
     public function create()
     {
         //
+        return view('administrador/marcas/create');
     }
 
     /**
@@ -31,6 +34,8 @@ class AdminController extends Controller
     public function store(Request $request)
     {
         //
+        Marcas::create(['nombre' =>request('nombre')]);
+        return redirect()->route('administrador.inventario');
     }
 
     /**
@@ -39,6 +44,7 @@ class AdminController extends Controller
     public function show(string $id)
     {
         //
+
     }
 
     /**
@@ -47,6 +53,8 @@ class AdminController extends Controller
     public function edit(string $id)
     {
         //
+        $marcas = Marcas::findOrFail($id);
+        return view('administrador.marcas.edit',['marcas'=>$marcas]);
     }
 
     /**
@@ -55,6 +63,10 @@ class AdminController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $marcas = Marcas::findOrFail($id);
+        $marcas->update($request->all());
+        $marcas->save();
+        return redirect()->route('administrador.inventario');
     }
 
     /**
@@ -63,5 +75,8 @@ class AdminController extends Controller
     public function destroy(string $id)
     {
         //
+        $marcas = Marcas::findOrFail($id);
+        $marcas->delete();
+        return redirect()->route('administrador.inventario');
     }
 }

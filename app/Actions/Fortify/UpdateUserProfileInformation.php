@@ -29,9 +29,6 @@ class UpdateUserProfileInformation implements UpdatesUserProfileInformation
             'tipodocumento' => ['required', 'string', 'max:20'], // Agregar el campo "tipodocumento"
         ])->validateWithBag('updateProfileInformation');
 
-        if (isset($input['photo'])) {
-            $user->updateProfilePhoto($input['photo']);
-        }
 
         if ($input['email'] !== $user->email &&
             $user instanceof MustVerifyEmail) {

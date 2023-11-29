@@ -30,13 +30,13 @@
         <nav class="navegacion">
             <ul>
                 <li>
-                    <a id="inbox" href="#">
+                    <a  href="{{route('administrador.index')}}">
                         <ion-icon name="clipboard-outline"></ion-icon>
                         <span>Tablas</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('administrador.inventario')}}">
+                    <a id="inbox" href="#">
                         <ion-icon name="folder-outline"></ion-icon>
                         <span>Inventario</span>
                     </a>
@@ -60,13 +60,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{-- {{route('administrador.programaciones')}} --}}">
+                    <a href="{{route('administrador.programaciones')}}">
                         <ion-icon name="calendar-outline"></ion-icon>
                         <span>Cronograma</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{-- {{route('administrador.factura')}} --}}">
+                    <a href="{{-- {{route('administrador.facturas')}} --}}">
                         <ion-icon name="cash-outline"></ion-icon>
                         <span>Ventas</span>
                     </a>
@@ -125,8 +125,22 @@
 
 
     <main>
+
         <div class="tittlee">
-            <h1>Tablas</h1>
+            <h1>Nueva Marca</h1>
+        </div>
+        <div class="cajaform">
+            <form action="{{route('marcas.store')}}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <fieldset class="fieldset">
+                <legend>Nueva Marca</legend>
+                <div>
+                    <label for="nombre">Nombre</label>
+                     <input type="text" name="nombre" id="nombre">
+                </div>
+                <a href="" onclick="return alert('¡Marca Agregada!')"><button type="submit">Crear marca</button></a>
+            </fieldset>
+            </form>
         </div>
     </main>
 

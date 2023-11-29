@@ -1,21 +1,23 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
+use App\Models\Vehiculos;
 
-
-class AdminController extends Controller
+class VehiculosController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
         //
-        return view('administrador/index');
-    }
+        $vehiculos = Vehiculos::all();
 
+        // Pasar los usuarios a la vista
+        return view('administrador/vehiculos', ['vehiculos' => $vehiculos]);
+    }
 
     /**
      * Show the form for creating a new resource.

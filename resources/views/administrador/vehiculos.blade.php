@@ -30,7 +30,7 @@
         <nav class="navegacion">
             <ul>
                 <li>
-                    <a id="inbox" href="#">
+                    <a href="{{route('administrador.index')}}">
                         <ion-icon name="clipboard-outline"></ion-icon>
                         <span>Tablas</span>
                     </a>
@@ -42,7 +42,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('administrador.clientes')}}">
+                    <a href="{{route('administrador.inventario')}}">
                         <ion-icon name="people-outline"></ion-icon>
                         <span>Clientes</span>
                     </a>
@@ -54,19 +54,19 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{route('administrador.vehiculos')}}">
+                    <a id="inbox" href="#">
                         <ion-icon name="car-sport-outline"></ion-icon>
                         <span>Vehículos</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{-- {{route('administrador.programaciones')}} --}}">
+                    <a href="{{route('administrador.programaciones')}}">
                         <ion-icon name="calendar-outline"></ion-icon>
                         <span>Cronograma</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{-- {{route('administrador.factura')}} --}}">
+                    <a href="{{route('administrador.facturas')}}">
                         <ion-icon name="cash-outline"></ion-icon>
                         <span>Ventas</span>
                     </a>
@@ -125,9 +125,37 @@
 
 
     <main>
+
         <div class="tittlee">
-            <h1>Tablas</h1>
+            <h1>Clientes</h1>
         </div>
+        
+        <div class="containert">
+            <table class="tablee">
+                <caption>Clientes</caption>
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Placa</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($vehiculos as $vehiculo)
+                            <tr>
+                                <td data-label="Id">{{ $vehiculo->idvehiculo }}</td>
+                                <td data-label="Marca">{{ $vehiculo->marca }}</td>
+                                <td data-label="Modelo">{{ $vehiculo->modelo }}</td>
+                                <td data-label="Placa">{{ $vehiculo->placa }}</td>
+                                <td data-label="Estado">{{ $vehiculo->estado }}</td>
+                            </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+        
     </main>
 
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>

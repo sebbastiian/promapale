@@ -21,6 +21,7 @@ class CreateNewUser implements CreatesNewUsers
     {
         Validator::make($input, [
             'name' => ['required', 'string', 'max:255'],
+            'nombretienda' => ['nullable', 'string', 'max:255'],
             'apellido' => ['required', 'string', 'max:255'], // Agregar el campo "apellido"
             'telefono' => ['required', 'string', 'max:20'], // Agregar el campo "telefono"
             'direccion' => ['required', 'string', 'max:255'], // Agregar el campo "direccion"
@@ -50,11 +51,6 @@ class CreateNewUser implements CreatesNewUsers
             $user->sueldo = 0; // Asignar valor predeterminado de sueldo
         }
 
-        // Verificar si el campo "nombretienda" es necesario
-        if ($input['roles_id'] == 2) {
-            $user->nombretienda = null; // Dejar el campo "nombretienda" como NULL para no clientes
-        }
-
         // Asignar el rol al usuario
         $user->roles_id = $input['roles_id'];
 
@@ -62,4 +58,5 @@ class CreateNewUser implements CreatesNewUsers
 
         return $user;
     }
+
 }

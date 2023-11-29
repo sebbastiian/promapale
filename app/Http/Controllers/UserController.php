@@ -2,20 +2,35 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
+use App\Models\User;
+use DB;
 
-
-class AdminController extends Controller
+class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        
-        //
-        return view('administrador/index');
-    }
+        $usuarios = User::all();
 
+        // Pasar los usuarios a la vista INDEX
+        return view('administrador/administradores', ['usuarios' => $usuarios]);
+    }
+    public function index2()
+    {
+        $usuarios = User::all();
+
+        // Pasar los usuarios a la vista CLIENTES
+        return view('administrador/clientes', ['usuarios' => $usuarios]);
+    }
+    public function index3()
+    {
+        $usuarios = User::all();
+
+        // Pasar los usuarios a la vista TRANSPORTADORES
+        return view('administrador/transportadores', ['usuarios' => $usuarios]);
+    }
 
     /**
      * Show the form for creating a new resource.

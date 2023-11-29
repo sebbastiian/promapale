@@ -55,31 +55,40 @@
             <!-- Tipo Documento -->
             <div class="mt-4">
                 <x-label for="tipodocumento" value="{{ __('Tipo de Documento') }}" />
-                <x-input id="tipodocumento" class="block mt-1 w-full" type="text" name="tipodocumento" :value="old('tipodocumento')" required autofocus autocomplete="tipodocumento" />
+                <select id="tipodocumento" name="tipodocumento" class="block mt-1 w-full" value="{{ __('Tipo de Documento') }}"  :value="old('tipodocumento')" required autofocus autocomplete="tipodocumento">
+                    <option>CC</option>
+                    <option>CE</option>
+                    <option>RC</option>
+                    <option>PA</option>
+                    <option>PPT</option>
+                </select>
                 <x-input-error for="tipodocumento" class="mt-2" />
             </div>
 
+            @role('administrador')
             <!-- Sueldo -->
             <div class="mt-4">
-                {{-- <x-label for="sueldo" value="{{ __('Sueldo') }}" /> --}}
+                <x-label for="sueldo" value="{{ __('Sueldo') }}" />
                 <x-input id="sueldo" class="block mt-1 w-full" type="hidden" name="sueldo" :value="old('sueldo', 0)" required autofocus autocomplete="sueldo" />
                 <x-input-error for="sueldo" class="mt-2" />
             </div>
-            
-            {{-- <!-- Estado -->
+            <!-- Estado -->
             <div class="col-span-6 sm:col-span-4">
                 <x-label for="estado" value="{{ __('Estado') }}" />
                 <x-input id="estado" class="block mt-1 w-full" type="text" name="estado" :value="old('estado', 'Activo')" required autofocus autocomplete="estado" />
                 <x-input-error for="estado" class="mt-2" />
-            </div> --}}
-            
+            </div>
             <!-- Roles ID -->
             <div class="mt-4">
-                {{-- <x-label for="roles_id" value="{{ __('Roles ID') }}" /> --}}
-                <x-input id="roles_id" class="block mt-1 w-full" type="hidden" name="roles_id" :value="old('roles_id', 2)" required autofocus autocomplete="roles_id" />
+                <x-label for="roles_id" value="{{ __('Role') }}" />
+                <select id="roles_id" name="roles_id" class="block mt-1 w-full">
+                    <option value="1" {{ old('roles_id', 2) == 1 ? 'selected' : '' }}>Administrador</option>
+                    <option value="2" {{ old('roles_id', 2) == 2 ? 'selected' : '' }}>Cliente</option>
+                    <option value="3" {{ old('roles_id', 2) == 3 ? 'selected' : '' }}>Empleado</option>
+                </select>
                 <x-input-error for="roles_id" class="mt-2" />
             </div>
-
+            @endrole
             <div class="mt-4">
                 <x-label for="password" value="{{ __('Password') }}" />
                 <x-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />

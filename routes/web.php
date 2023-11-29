@@ -15,37 +15,42 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {return view('welcome');})->name('welcome');
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified',
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified',])->group(function () {Route::get('/dashboard', function () {return view('dashboard');})->name('dashboard');});
 
+/*USUARIOS*/
+Route::get('administrador/index',[App\Http\Controllers\AdminController::class, 'index'])->name('administrador.index'); /* VISTA TABLAS */
+Route::get('administrador/clientes',[App\Http\Controllers\UserController::class, 'index2'])->name('administrador.clientes'); /* TABLA CLIENTES */
+Route::get('administrador/transportadores',[App\Http\Controllers\UserController::class, 'index3'])->name('administrador.transportadores'); /* TABLA TRASPORTADORES */
 
-/*administrador*/
-Route::get('administrador/Index',[App\Http\Controllers\AdminController::class, 'index'])->name('administrador.index');
+/* FACTURAS */
+Route::get('administrador/facturas',[App\Http\Controllers\AdminController::class, 'index3'])->name('administrador.facturas'); 
+
+/* VEHICULOS */
+Route::get('administrador/vehiculos',[App\Http\Controllers\VehiculosController::class, 'index'])->name('administrador.vehiculos'); /* TABLA DE VEHICULOS */
+
+/* PROGRAMACIONES */
+Route::get('administrador/programaciones',[App\Http\Controllers\AdminController::class, 'index5'])->name('administrador.programaciones'); /* TABLA DE PROGRAMACIONES */
 
 /*TIPO*/
-Route::get('tipos/Index',[App\Http\Controllers\TiposController::class, 'index'])->name('tipos.index');
-Route::get('tipos/create',[App\Http\Controllers\TiposController::class,'create'])->name('tipos.create');
-Route::post('tipos/guardar',[App\Http\Controllers\TiposController::class,'store'])->name('tipos.store');
-Route::get('tipos/{tipos}/eliminar',[App\Http\Controllers\TiposController::class, 'destroy'])->name('tipos.destroy');
-Route::get('tipos',function (){return view('tipos/index');});
+Route::get('administrador/tipos/crear', [App\Http\Controllers\TiposController::class, 'create'])->name('tipos.create');
+Route::post('administrador/tipos/agregar', [App\Http\Controllers\TiposController::class, 'store'])->name('tipos.store');
+Route::get('administrador/tipos/edit/{id}', [App\Http\Controllers\TiposController::class, 'edit'])->name('administrador.tipos.edit');
+Route::get('administrador/{tipos}/actualizar', [App\Http\Controllers\TiposController::class, 'update'])->name('tipos.update');
+Route::get('administrador/tipos/eliminar/{id}',  [App\Http\Controllers\TiposController::class, 'destroy'])->name('tipos.destroy');
+Route::get('administrador/inventario',[App\Http\Controllers\TiposController::class, 'index'])->name('administrador.inventario');
 
 /*MARCA*/
-Route::get('marcas/Index','App\Http\Controllers\MarcasController@index')->name('marcas.index');
-Route::get('marcas/create',[App\Http\Controllers\MarcasController::class,'create'])->name('marcas.create');
-Route::post('marcas/guardar',[App\Http\Controllers\MarcasController::class,'store'])->name('marcas.store');
-Route::get('marcas',function (){return view('marcas/index');});
+Route::get('administrador/marcas/crear', [App\Http\Controllers\MarcasController::class, 'create'])->name('marcas.create');
+Route::post('administrador/marcas/agregar', [App\Http\Controllers\MarcasController::class, 'store'])->name('marcas.store');
+Route::get('administrador/marcas/edit/{id}', [App\Http\Controllers\MarcasController::class, 'edit'])->name('administrador.marcas.edit');
+Route::get('productos/{marcas}/actualizar',[App\Http\Controllers\MarcasController::class, 'update'])->name('marcas.update');
+Route::get('administrador/marcas/eliminar/{id}',  [App\Http\Controllers\MarcasController::class, 'destroy'])->name('marcas.destroy');
+Route::get('administrador/inventario',[App\Http\Controllers\MarcasController::class, 'index'])->name('administrador.inventario');
 
 /*PRODUCTOS*/
-Route::get('productos/Index',[App\Http\Controllers\ProductosController::class, 'index'])->name('productos.index');
-Route::get('productos/create',[App\Http\Controllers\ProductosController::class,'create'])->name('productos.create');
-Route::post('productos/guardar',[App\Http\Controllers\ProductosController::class,'store'])->name('productos.store');
-Route::get('productos/{productos}/editar',[App\Http\Controllers\ProductosController::class, 'edit'])->name('productos.edit');
-Route::get('productos/{productos}/actualizar',[App\Http\Controllers\ProductosController::class, 'update'])->name('productos.update');
-Route::get('productos',function (){return view('productos/index');});
+Route::get('administrador/productos/crear', [App\Http\Controllers\ProductosController::class, 'create'])->name('productos.create');
+Route::post('administrador/productos/agregar', [App\Http\Controllers\ProductosController::class, 'store'])->name('productos.store');
+Route::get('administrador/productos/edit/{id}', [App\Http\Controllers\ProductosController::class, 'edit'])->name('administrador.productos.edit');
+Route::get('administrador/productos/actualizar/{id}', [App\Http\Controllers\ProductosController::class, 'update'])->name('productos.update');
+Route::get('administrador/productos/eliminar/{id}',  [App\Http\Controllers\ProductosController::class, 'destroy'])->name('productos.destroy');
+Route::get('administrador/inventario',[App\Http\Controllers\ProductosController::class, 'index'])->name('administrador.inventario');    

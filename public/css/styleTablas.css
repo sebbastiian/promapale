@@ -1,120 +1,104 @@
-.navegacion{
-  display: flex;
-  flex-direction: row;
+.botoned{
+  color:#000000;
+  padding: 3%;
+  border-radius: 4px;
+  text-decoration: none;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.4);
 }
-/* Estilos para la tabla */
-  .contenedortabla {
-    max-width: 1300px;
-    margin: 0 auto;
-    padding: 10px;
-  }
-  .contenedortablasan {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 10px;
-  }
-  .contenedortablalq {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 10px;
-  }
-  .tabla {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #ffffffbd;
-    border-radius: 5px;
-  }
-  
-  /* Estilos para los botones */
-  .boton {
-    display: inline-block;
-    background-color: #2E86C1;
-    color: white;
-    text-decoration: none;
-    padding: 8px 16px;
-    border-radius: 4px;
-  }
-  .botonc {
-    text-align: center;
-  }
-  
-  .boton:hover {
-    background-color: #DC3545;
-  }
-  
-  .boton.edit:hover {
-    background-color: #28A745;
-  }
+.botonel{
+  color:#000000;
+  padding: 3%;
+  border-radius: 4px;
+  text-decoration: none;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+}
+.botonel:hover{
+  background-color: #D10024;
+  color: #fff;
+  transform: scale(1.1);
+  transition: transform 0.3s ease; 
+}
+.botoned:hover{
+  background-color: #0288D1;
+  color: #fff;
+  transform: translateX(10px);
+}
+.containert{
+  width: 90%;
+  margin: auto;
+}
 
-  thead td {
-    background-color: #007bff08;
+.tablee caption{
+  font-size: 20px;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-top: 4%;
+  margin-bottom: 2%;
+  color: #fff;
+}
+
+.tablee tr{
+  background-color:#ffffff;
+  color: #000000;
+}
+
+.tablee th, .tablee td{
+  font-size: 16px;
+  padding: 8px;
+  text-align: center;
+}
+td{
+  height: 55px;
+}
+
+.tablee thead th{
+  background-color: #15161D;
+  color: #fff;
+  border-bottom: 4px solid #D10024;
+}
+.tablee tbody td{
+  border-bottom: #adadad solid 1px;
+}
+.tablee tbody tr:hover{
+  background-color: rgba(255, 255, 255, 0.729);
+}
+
+.tablee tbody td:hover{
+  background-color: rgba(255, 255, 255, 0.245);
+}
+
+@media screen and (max-width: 800px){
+  .tablee{
+    border: 0px;
+  }
+  .tablee caption{
+    font-size: 22px;
+  }
+  .tablee thead{
+    display: none;
+  }
+  .tablee tr {
+    margin-bottom: 8px;
+    border-bottom: 4px solid #ddd;
+    display: block;
+  }
+  .tablee th, .tablee td {
+    font-size: 12px;
+  }
+  .tablee td{
+    display: block;
+    border-bottom: 1px solid #ddd;
+    text-align: right;
+  }
+  .tablee td:last-child{
+    border-bottom: 0px;
+  }
+  .tablee td::before{
+    content: attr(data-label);
     font-weight: bold;
-    padding: 5px;
-    text-align: left;
-    border-left:1px solid rgba(0, 0, 0, 0.175);
-    border-right:1px solid rgba(0, 0, 0, 0.165);
+    text-transform: uppercase;
+    float: left;
 
   }
-  
-  tbody td {
-    padding: 5px;
-    border-bottom: 0.5px solid #0019351c;
-  }
-  
-  tbody tr:nth-child(even) {
-    background-color: #007bff04;
-  }
-  
-  tbody tr:hover {
-    background-color: #00000043;
-  }
-  
-  .pagina{
-    margin-left: 50px;
-  }
-  .s{
-    margin-top: 10px;
-  }
-  .crear{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 25px;
-  }
-  .crear div{
-    background-color: #ffffffab;
-    padding: 5px;
-    border-radius: 5px;
-    
-  }
-  .crear a{
-    text-decoration: none;
-    font-size: x-large;
-    color: black;
-    width: 100%;
-    transition: all 0.3s ease;
-  }
 
-  .crearb:hover{
-    background-color: #2E86C1;
-    color: #ffffff;
-    
-  }
-
-  .a:hover svg {
-    stroke: #ffffff;
-    opacity: 0;
-    animation: changeSvg 2s infinite;
-  }
-
-  @keyframes changeSvg {
-    0% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 1;
-    }
-    100% {
-      opacity: 1;
-    }
-  }
+}
